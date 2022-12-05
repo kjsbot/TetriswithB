@@ -1,15 +1,13 @@
 #include "block.h"
 
+//Block::Block(int x, int y, int r) : x{x}, y{y}, r{r} {}
+
+//Block::~Block() {}
 /*
-void Block::addPart() {
-  parts.push_back(BlockPart(x, y));
+int Block::xPos(int part) {
+  return x;
 }
 
-int xPos(int part) {
-  return parts[part].xPos();
-}
-
-int yPos(int part) {
-  return parts[part].yPos();
-}
-*/
+int Block::yPos(int part) {
+  return y;
+}*/

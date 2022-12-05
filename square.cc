@@ -1,7 +1,7 @@
 #include "square.h"
 #include <string>
 
-Square::Square() : isOccupied{false}, show{false} {}
+Square::Square(int r, int c) : row{r}, col{c}, isOccupied{false}, show{false} {}
 
 void Square::setSquare(char newChar) {
   setChar = newChar;
@@ -9,5 +9,5 @@ void Square::setSquare(char newChar) {
 }
 
 string Square::print() {
-  return "temp"; //piece->symbol;
+  return symbol;
 }

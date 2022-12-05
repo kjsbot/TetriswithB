@@ -8,14 +8,15 @@ class Board;
 
 class Square {
   public:
-  //  int row;
-  //  int col;
+    int row;
+    int col;
     bool show;
     bool isOccupied;
     char setChar;
-    // bool isBlind?;
+    string symbol;
+
     Board *board; 
-    Square();
+    Square(int r, int c);
     void setSquare(char newChar);
     string print();
 };

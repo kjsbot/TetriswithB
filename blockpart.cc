@@ -1,12 +1,11 @@
 #include "blockpart.h"
-/*
+
 BlockPart::BlockPart(int x, int y) : x{x}, y{y} {}
 
-BlockPart::xPos() {
+int BlockPart::getXPos() {
   return x;
 }
 
-BlockPart::yPos() {
+int BlockPart::getYPos() {
   return y;
 }
-*/
