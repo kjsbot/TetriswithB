@@ -1,11 +1,11 @@
 #include "board.h"
 #include "levelzero.h"
-//#include "levelone.h"
-//#include "leveltwo.h"
+#include "levelone.h"
+#include "leveltwo.h"
 
 using namespace std;
 
-Board::Board(int player, int level) : rows{18}, cols{11}, player{player}, levelNum{level}, newGame{true} {
+Board::Board(int player, int level, string f) : rows{18}, cols{11}, player{player}, levelNum{level}, level{nullptr} {
   for (int i = 0; i <= rows; i++) {
     vector<Square> row;
     for (int j = 0; j <= cols; j++) {
@@ -15,16 +15,17 @@ Board::Board(int player, int level) : rows{18}, cols{11}, player{player}, levelN
   }
 }
 
-void Board::setLevel(string fileName) {
-  delete level;
+void Board::setLevel() {
+  if (level != nullptr) delete level;
+  
   if (levelNum == 0) {
     level = new LevelZero{-1, fileName};
-  } /*else if (levelNum == 1) {
-
+  } else if (levelNum == 1) {
+    level = new LevelOne{};
   } else if (levelNum == 2) {
-
-  } else if (levelNum == 3) {
-
+    level = new LevelTwo{};
+  } /*else if (levelNum == 3) {
+    
   } else {
 
   }*/
@@ -197,7 +198,7 @@ Block* Board::getNextBlock() { return level->generateNextBlock(); }
 
 ///////////////////////////////////////////////////
 
-
+/*
 
 int Board::updateRow(int row) {
   blocksPartsPerRow[y] += 1;
@@ -285,10 +286,10 @@ Block* Board::generateNextBlock(char type, int x, int y, int r) {
       break;
     case 'Z': 
       makeBlock = make_unique<Block>(ZBlock(x, y, r));
-      break;*/
+      break;
     case 'T': 
       newBlock = new TBlock(x, y, r);
       break;
     }
   return newBlock;
-}
+}*/

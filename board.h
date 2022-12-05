@@ -28,6 +28,8 @@ class Board {
   bool heavy;
   bool lost;
 
+    string fileName;
+
   //unique_ptr<Block> currBlock;
   //unique_ptr<Block> nextBlock;
   Block *currBlock;
@@ -39,7 +41,7 @@ class Board {
   int r;
   int blockSize;
 
-    Board(int player, int level);
+    Board(int player, int level, string f);
     ~Board();
 
     void printRow(int row);
@@ -56,7 +58,7 @@ class Board {
 
     bool validMove();
 
-    void setLevel(string fileName);
+    void setLevel();
 
     bool isHeavy();
 
@@ -86,7 +88,7 @@ class Board {
     void updateBlocksPerRow();*/
 
     vector<int> blockspartsPerRow;
-
+/*
     bool newGame;
 
     Block* currBlockMove;
@@ -112,7 +114,7 @@ class Board {
     void makeNewBlock();
     void updateCurrBlock(int xNew, int yNew, int rNew);
     Block* generateNextBlock(char type, int x, int y, int r);
-    void setBlockType(char type, char replacedBlock);
+    void setBlockType(char type, char replacedBlock);*/
 };
 
 #endif

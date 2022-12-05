@@ -5,10 +5,10 @@
 
 class TBlock : public Block {
   private:
-    string tBlockRotationUP = "TTT \n T  \n"; //{"    \n", "    \n", "TTT \n", " T  \n"};
-    string tBlockRotationRIGHT = " T  \nTT  \n T  \n"; //{"    \n", " T  \n", "TT  \n", " T  \n"};
-    string tBlockRotationDOWN = " T  \nTTT \n"; //{"    \n", "    \n", " T  \n", "TTT \n"};
-    string tBlockRotationLEFT = "T   \nTT  \nT   \n"; //{"    \n", "T   \n", "TT  \n", "T   \n"};
+    string tBlockRotationUP = "        TTT  T  "; //{"    \n", "    \n", "TTT \n", " T  \n"};
+    string tBlockRotationRIGHT = "     T  TT   T  "; //{"    \n", " T  \n", "TT  \n", " T  \n"};
+    string tBlockRotationDOWN = "         T  TTT "; //{"    \n", "    \n", " T  \n", "TTT \n"};
+    string tBlockRotationLEFT = "    T   TT  T   "; //{"    \n", "T   \n", "TT  \n", "T   \n"};
     
     int x;
     int y;

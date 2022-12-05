@@ -3,11 +3,27 @@
 #include <fstream>
 #include <string>
 #include "board.h"
-//#include "Levels/abstractlevel.h"
+#include "abstractlevel.h"
 
 using namespace std;
 
-void displayGame(Board *b1, Board *b2) {
+void printBlockRow(string block, int player) {
+  if (player == 1) {
+    int i = 0;
+    while (i <= 15) {
+      if (block.substr(i, 5) != "    \n") cout << block.substr(i, 5);
+      i += 5;
+    }
+  } else {
+    int i = 0;
+    while (i <= 15) {
+      if (block.substr(i, 5) != "    \n") cout << "                      " << block.substr(i, 5);
+      i += 5;
+    }
+  }
+}
+
+void displayGame(Board *b1, Board *b2, int player) {
   // Print Header
   cout << "Level:    " << b1->levelNum; // correct num of spaces???
   cout << "          "; // correct num of spaces???
@@ -29,13 +45,16 @@ void displayGame(Board *b1, Board *b2) {
   cout << "Next:";
   cout << "                ";
   cout << "Next:" << endl;
-  cout << b1->nextBlock->printBlock() << endl;
-  //cout << "                ";
-  //cout << b2->nextBlock->printBlock() << endl;
+
+  if (player == 1) {
+    printBlockRow(b1->nextBlock->printBlock(), 1);
+  } else {
+    printBlockRow(b2->nextBlock->printBlock(), 2);
+  }
 }
 
-
 int main(int argc, char* argv[]) {
+  
   string player1File = "sequence1.txt";
   string player2File = "sequence2.txt";
   bool hasGraphics = true;
@@ -82,27 +101,18 @@ int main(int argc, char* argv[]) {
   }
 
   // Setup
-  /*shared_ptr<Board> board1 = make_shared<Board>(Board(1, 0));
-  shared_ptr<Board> board2 = make_shared<Board>(Board(1, 0));
-  shared_ptr<Board> currentPlayer = board1;*/
+  Board *board1 = new Board(1, gameLevel, player1File);
+  Board *board2 = new Board(2, gameLevel, player2File);
 
-  Board *board1 = new Board(1, gameLevel);
-  Board *board2 = new Board(2, gameLevel);
-
-  board1->setLevel(player1File);
-  board2->setLevel(player2File);
+  board1->setLevel();
+  board2->setLevel();
 
   Board *currentPlayer = board1;
 
   int numWins1 = 0;
   int numWins2 = 0;
 
-  /*std::map<string, string> commands = {
-        { "ri" , "right" },
-        { "dr" , "drop" }, { "dro" , "right" }
-  };*/
-
-  // Game loop
+  // Gameloop
   while (true) {
     bool restart = false;
 
@@ -112,8 +122,8 @@ int main(int argc, char* argv[]) {
     board1->nextBlock = board1->getNextBlock();
     board2->nextBlock = board2->getNextBlock();
 
-    //board1->getNextBlock();
-    //board2->getNextBlock();
+    board1->getNextBlock();
+    board2->getNextBlock();
 
     // User input loop
     while (true) {
@@ -122,7 +132,7 @@ int main(int argc, char* argv[]) {
       
       int multiplier = 1;
 
-      displayGame(board1, board2);
+      displayGame(board1, board2, currentPlayer->getPlayer());
 
       if (cmd == "restart") {
         restart = true;
@@ -148,14 +158,20 @@ int main(int argc, char* argv[]) {
       else if (cmd == "drop") {
         //currentPlayer->drop();
       }
-      else if (cmd == "levelup" && currentPlayer->levelNum != 4) {
-        //currentPlayer.updateLevel(currentPlayer->levelNum++);
+      else if (cmd == "levelup" && currentPlayer->levelNum < 4) {
+        currentPlayer->levelNum += 1;
+        cout << currentPlayer->levelNum << endl;
+        currentPlayer->setLevel();
       }
-      else if (cmd == "leveldown" && currentPlayer->levelNum != 0) {
-        //currentPlayer.updateLevel(currentPlayer->levelNum--);
+      else if (cmd == "leveldown" && currentPlayer->levelNum > 0) {
+        currentPlayer->levelNum -= 1;
+        cout << currentPlayer->levelNum << endl;
+        currentPlayer->setLevel();
       }
-    }
 
+      break;
+    }
+/*
     if (restart) { continue; }
 
     if (currentPlayer->isLost()) {
@@ -209,7 +225,7 @@ int main(int argc, char* argv[]) {
           // apply on board1
         }
       }
-    }
+    }*/
 
     if (currentPlayer->getPlayer() == 1) {
       currentPlayer = board2;
